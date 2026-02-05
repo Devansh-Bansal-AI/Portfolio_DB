@@ -2,35 +2,26 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { cn } from "../../utils/cn";
 
-interface Props {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-}
-
-const MagneticButton = ({ children, className, onClick }: Props) => {
+const MagneticButton = ({ children, className }: any) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0 });
 
-  const handleMouse = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+  const handleMove = (e: React.MouseEvent) => {
+    const rect = ref.current!.getBoundingClientRect();
+    setPos({
+      x: (e.clientX - (rect.left + rect.width / 2)) * 0.15,
+      y: (e.clientY - (rect.top + rect.height / 2)) * 0.15,
+    });
   };
-
-  const reset = () => setPosition({ x: 0, y: 0 });
 
   return (
     <motion.div
       ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={cn("cursor-pointer", className)}
-      onClick={onClick}
+      onMouseMove={handleMove}
+      onMouseLeave={() => setPos({ x: 0, y: 0 })}
+      animate={pos}
+      transition={{ type: "spring", stiffness: 120, damping: 18 }}
+      className={cn("inline-block", className)}
     >
       {children}
     </motion.div>

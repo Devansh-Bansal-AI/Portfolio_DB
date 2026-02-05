@@ -1,11 +1,9 @@
 import { 
-  Code2, 
   Cpu, 
   Globe, 
   Github, 
   Linkedin, 
   Twitter, 
-  Award, 
   BookOpen,
   Sparkles,
   Database,

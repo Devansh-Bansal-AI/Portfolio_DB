@@ -1,70 +1,186 @@
 @import "tailwindcss";
 
-@theme {
-  /* --- 1. Define Colors --- */
-  --color-primary: #6C63FF;
-  --color-dark: #050505;
-
-  /* --- 2. Define Animations --- */
-  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
-  --animate-blob: blob 7s infinite;
-  --animate-meteor: meteor 5s linear infinite;
-
-  /* --- 3. Define Keyframes --- */
-  @keyframes infinite-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
-  }
-
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
-
-  @keyframes meteor {
-    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
-  }
+/* ─────────────────────────────────────────────
+   ROOT & VIEWPORT SAFETY (CRITICAL)
+   ───────────────────────────────────────────── */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
 }
 
-/* --- Global Styles --- */
 html {
   scroll-behavior: smooth;
 }
 
+/* ─────────────────────────────────────────────
+   THEME TOKENS
+   ───────────────────────────────────────────── */
+@theme {
+  /* Brand colors */
+  --color-primary: #6c63ff;
+  --color-dark: #050505;
+
+  /* Animation presets (slow = premium) */
+  --animate-infinite-scroll: infinite-scroll 40s linear infinite;
+  --animate-blob: blob 12s ease-in-out infinite;
+  --animate-meteor: meteor 6s linear infinite;
+
+  /* Keyframes */
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(40px, -60px) scale(1.12);
+    }
+    66% {
+      transform: translate(-30px, 30px) scale(0.92);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(215deg) translateX(-600px);
+      opacity: 0;
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL BODY & TYPOGRAPHY
+   ───────────────────────────────────────────── */
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   background-color: var(--color-dark);
-  font-family: sans-serif;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* Typography polish */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* Custom cursor active */
+  cursor: none;
 }
 
-/* --- Custom Scrollbar --- */
+/* Hide cursor on interactive elements */
+a,
+button {
+  cursor: none;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(108, 99, 255, 0.25);
+  color: #fff;
+}
+
+/* ─────────────────────────────────────────────
+   ACCESSIBILITY: REDUCED MOTION
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  body,
+  a,
+  button {
+    cursor: auto;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   WEBGL / LIQUID ETHER SAFETY
+   ───────────────────────────────────────────── */
+canvas {
+  display: block;
+  image-rendering: auto;
+}
+
+/* Prevent WebGL from blocking interactions */
+.liquid-ether-container {
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR (SUBTLE & MODERN)
+   ───────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #070707;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
-  border-radius: 4px;
+  background: #1f1f1f;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);
 }
 
-/* --- Animation Utilities --- */
+/* ─────────────────────────────────────────────
+   UTILITY HELPERS (GLOBAL)
+   ───────────────────────────────────────────── */
+
+/* Animation delays */
 .animation-delay-2000 {
   animation-delay: 2s;
 }
+
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Soft glow (use sparingly) */
+.glow-primary {
+  box-shadow: 0 0 60px rgba(108, 99, 255, 0.35);
+}
+
+/* Glass effect (performance-friendly) */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Subtle hover lift */
+.hover-lift {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
 }

@@ -4,7 +4,6 @@ import {
   Cpu, Globe, Database, Layers, Sparkles 
 } from "lucide-react";
 import MagneticButton from "../ui/MagneticButton";
-import Projects from "./Projects";
 
 const About = () => {
   // Data for the "Get to know me" list
@@ -19,7 +18,7 @@ const About = () => {
   const orbitIcons = [Cpu, Globe, Database, Layers, Code];
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-dark/50">
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden bg-dark/50">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         {/* ---------------- LEFT SIDE: TEXT CONTENT ---------------- */}
@@ -98,7 +97,7 @@ const About = () => {
                                 transform: `rotate(${angle}deg) translate(160px) rotate(-${angle}deg)`, // Math to place on circle
                             }}
                         >
-                            <div className="w-12 h-12 bg-[#0a0a0a] border border-white/10 rounded-xl flex items-center justify-center text-primary shadow-lg animate-[spin_20s_linear_infinite_reverse]">
+                            <div className="w-12 h-12 bg-[#0a0a0a] border border-white/10 rounded-xl flex items-center justify-center text-primary shadow-lg animate-[spin_40s_linear_infinite_reverse]">
                                 <Icon size={22} />
                             </div>
                         </div>
@@ -107,13 +106,14 @@ const About = () => {
             </div>
 
             {/* 3. Center Core (User Initials or Main Icon) */}
-            <div className="absolute w-24 h-24 bg-gradient-to-br from-primary to-violet-900 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(108,99,255,0.4)] z-20">
+            <div className="absolute w-24 h-24 bg-gradient-to-br from-primary to-violet-900 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(108,99,255,0.45)] z-20">
                 <span className="text-3xl font-bold text-white">DB</span>
             </div>
 
             {/* 4. Floating Bento Card: Achievement 1 */}
             <motion.div 
                 animate={{ y: [0, -10, 0] }}
+                whileHover={{ x: 6 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-10 right-0 md:-right-4 bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl flex items-center gap-3 w-48 shadow-xl z-30"
             >

@@ -61,7 +61,7 @@ const Skills = () => {
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
-              className="flex flex-col items-center justify-center gap-4 w-40 h-40 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-primary/50 hover:bg-white/10 transition-all duration-300 group cursor-pointer"
+              className="flex flex-col items-center justify-center gap-4 w-40 h-40 bg-white/5 border border-white/5 rounded-2xl bg-white/[0.03] hover:border-primary/50 hover:bg-white/10 transition-all duration-300 group cursor-pointer"
             >
               <div className="w-16 h-16 flex items-center justify-center">
                 <img

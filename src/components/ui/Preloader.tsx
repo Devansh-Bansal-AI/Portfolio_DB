@@ -1,42 +1,45 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const Preloader = () => {
-  const [exit, setExit] = useState(false);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setExit(true), 2500);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setShow(false), 2600);
+    return () => clearTimeout(t);
   }, []);
 
-  if (exit) return null;
-
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{ duration: 0.8, delay: 2.2 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505] text-white"
-    >
-      <div className="text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-4xl font-bold tracking-widest text-primary"
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-dark"
         >
-          DEVANSH BANSAL
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-2 text-sm text-gray-400"
-        >
-          AI & WEB DEVELOPER
-        </motion.p>
-      </div>
-    </motion.div>
+          <div className="text-center space-y-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl md:text-6xl tracking-[0.3em] font-semibold text-primary"
+            >
+              DEVANSH
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-xs tracking-widest text-gray-400"
+            >
+              AI × WEB × ENGINEERING
+            </motion.p>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
